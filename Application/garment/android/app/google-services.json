@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458008681909",
+    "project_id": "garment-a152b",
+    "storage_bucket": "garment-a152b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458008681909:android:559c29c4cbcd025452cdfc",
+        "android_client_info": {
+          "package_name": "com.example.garment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTPJKrLw3SKzX5IVzBhGpTgkOfo3HiVTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
