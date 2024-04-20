@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final VoidCallback showRegisterPage;
+  const LoginPage({super.key, required this.showRegisterPage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               Image(image: AssetImage('images/logo.png')),
               // Add some sort of slogan
               Text(
-                "Find Your New Style Easy",
+                "Find your new style easy.",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -147,26 +148,30 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         )),
                   ),
+
                   // Register
                   SizedBox(width: 24),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Container(
-                        padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                        decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Register Account",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
+                    child: GestureDetector(
+                      onTap: widget.showRegisterPage,
+                      child: Container(
+                          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                        )),
+                          child: Center(
+                            child: Text(
+                              "Register Account",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          )),
+                    ),
                   ),
                   SizedBox(width: 15),
                 ],
