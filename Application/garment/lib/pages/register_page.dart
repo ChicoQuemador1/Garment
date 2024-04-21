@@ -43,18 +43,23 @@ class _RegisterPageState extends State<RegisterPage> {
         _firstNameController.text.trim(),
         _lastNameController.text.trim(),
         _emailController.text.trim(),
-        _passwordController.text.trim(),
       );
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text("Passwords do not match."),
+            );
+          });
     }
   }
 
-  Future addUserDetails(
-      String firstName, String lastName, String email, String password) async {
+  Future addUserDetails(String firstName, String lastName, String email) async {
     await FirebaseFirestore.instance.collection('users').add({
       'first name': firstName,
       'last name': lastName,
       'email': email,
-      'password': password,
     });
   }
 
