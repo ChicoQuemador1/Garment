@@ -3,18 +3,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class NavigationMenu extends StatefulWidget {
+  const NavigationMenu({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<NavigationMenu> createState() => _NavigationMenuState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _NavigationMenuState extends State<NavigationMenu> {
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        destinations: [
+          Container(color: Colors.green),
+          Container(color: Colors.blue),
+          Container(color: Colors.deepPurple),
+          Container(color: Colors.orange),
+        ],
+      ),
+      /*
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,6 +45,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      */
     );
   }
 }

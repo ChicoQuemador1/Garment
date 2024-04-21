@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../pages/home_page.dart';
+import '../pages/navigation_menu.dart';
 import 'auth_page.dart';
 
 class LoginCheck extends StatelessWidget {
@@ -17,7 +17,7 @@ class LoginCheck extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomePage();
+            return NavigationMenu();
           } else {
             return AuthPage();
           }
