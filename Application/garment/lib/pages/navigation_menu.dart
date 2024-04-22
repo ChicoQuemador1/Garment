@@ -3,7 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'store/home_page.dart';
+import 'main/home_page.dart';
+import 'main/profile_page.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
@@ -77,7 +78,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
           HomePage(),
           HomePage(),
           HomePage(),
-          HomePage(),
+          ProfilePage(),
         ][currentPageIndex],
       ),
       /*

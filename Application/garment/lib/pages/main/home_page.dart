@@ -47,27 +47,6 @@ class _HomePageState extends State<HomePage> {
                       });
                 });
               }),
-              // TEMPORARY Sign out
-              SizedBox(height: 50),
-              Text(
-                "signed in as: ${user.email!}",
-                style: TextStyle(
-                  fontFamily: 'Sniglet',
-                ),
-              ),
-              // Sign Out Button
-              MaterialButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                color: Colors.black54,
-                child: Text(
-                  'Sign Out',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              )
             ],
           ),
         ),
