@@ -50,7 +50,8 @@ class _LoginPageState extends State<LoginPage> {
                 "Find your new style easy.",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 18,
+                  fontFamily: 'Sniglet',
                 ),
               ),
               // Email Address Text Field
@@ -114,11 +115,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: Center(
                         child: Text(
-                          "Sign In",
+                          "Sign in",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
+                            fontFamily: 'Sniglet',
                           ),
                         ),
                       )),
