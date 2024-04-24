@@ -86,10 +86,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 Image(image: AssetImage('images/logo.png')),
                 // Add some sort of slogan
                 Text(
-                  "Register Your Account Below",
+                  "Register Below!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
+                    fontFamily: 'Sniglet',
                   ),
                 ),
 
@@ -110,6 +111,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'First Name',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Sniglet',
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
                       ),
                     ),
@@ -133,6 +138,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Last Name',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Sniglet',
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
                       ),
                     ),
@@ -156,6 +165,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Email',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Sniglet',
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
                       ),
                     ),
@@ -180,6 +193,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Password',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Sniglet',
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
                       ),
                     ),
@@ -204,6 +221,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Confirm Password',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Sniglet',
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
                       ),
                     ),
@@ -229,6 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
+                              fontFamily: 'Sniglet',
                             ),
                           ),
                         )),
@@ -245,6 +267,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
+                        fontFamily: 'Sniglet',
                       ),
                     ),
 
@@ -266,6 +289,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
+                                  fontFamily: 'Sniglet',
                                 ),
                               ),
                             )),
