@@ -77,7 +77,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 225),
+                  SizedBox(width: 190),
+                  Text(
+                    "slide",
+                    style: TextStyle(
+                      fontFamily: "Sniglet",
+                      fontSize: 14,
+                    ),
+                  ),
                   Icon(Icons.chevron_right, color: Colors.black, size: 40),
                 ],
               ),
@@ -117,7 +124,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 270),
+                  SizedBox(width: 235),
+                  Text(
+                    "slide",
+                    style: TextStyle(
+                      fontFamily: "Sniglet",
+                      fontSize: 14,
+                    ),
+                  ),
                   Icon(Icons.chevron_right, color: Colors.black, size: 40),
                 ],
               ),
