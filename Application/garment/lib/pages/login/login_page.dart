@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -52,104 +54,156 @@ class _LoginPageState extends State<LoginPage> {
                   fontFamily: 'Sniglet',
                 ),
               ),
-              SizedBox(height: 20),
-
               // Email Address Text Field
+              SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: buildTextField(_emailController, 'Email'),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Email',
+                        hintStyle: TextStyle(
+                          fontFamily: 'Sniglet',
+                          color: Colors.black
+                              .withOpacity(0.5), // Transparency set to 50%
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-
               SizedBox(height: 10),
-
-              // Password Text Field
+              // Password Text Fi0eld
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: buildTextField(_passwordController, 'Password',
-                    isObscure: true),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                          fontFamily: 'Sniglet',
+                          color: Colors.black
+                              .withOpacity(0.5), // Transparency set to 50%
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               // Sign In Button
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: buildButton("Sign in", signIn, primary: true),
+                child: GestureDetector(
+                  onTap: signIn,
+                  child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.black87,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Sign in",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'Sniglet',
+                          ),
+                        ),
+                      )),
+                ),
               ),
 
               // Reset Password and Register Now
               SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(width: 15),
                   // Forgot Password
-                  buildButton("Forgot Password?", () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ForgotPasswordPage()));
-                  }),
-                  SizedBox(width: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ForgotPasswordPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Container(
+                          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                fontFamily: 'Sniglet',
+                              ),
+                            ),
+                          )),
+                    ),
+                  ),
+
                   // Register
-                  buildButton("Register Account", widget.showRegisterPage),
+                  SizedBox(width: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: GestureDetector(
+                      onTap: widget.showRegisterPage,
+                      child: Container(
+                          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Register Account",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                fontFamily: 'Sniglet',
+                              ),
+                            ),
+                          )),
+                    ),
+                  ),
+                  SizedBox(width: 15),
                 ],
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildTextField(TextEditingController controller, String hintText,
-      {bool isObscure = false}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: TextField(
-          controller: controller,
-          obscureText: isObscure,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: hintText,
-            hintStyle: TextStyle(
-              fontFamily: 'Sniglet',
-              color: Colors.black.withOpacity(0.5),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildButton(String text, VoidCallback onPressed,
-      {bool primary = false}) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Container(
-          padding: EdgeInsets.all(
-              20), // Same padding as the "Sign in" button to match height
-          decoration: BoxDecoration(
-            color: primary ? Colors.black87 : Colors.black54,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: primary
-                    ? 18
-                    : 12, // Differentiate text size for primary button
-                fontFamily: 'Sniglet',
-              ),
-            ),
           ),
         ),
       ),

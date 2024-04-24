@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -48,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               content: Text("Passwords do not match."),
             );
           });
@@ -64,12 +62,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   bool passwordConfirmed() {
-    if (_passwordController.text.trim() !=
-        _confirmPasswordController.text.trim()) {
-      return false;
-    } else {
-      return true;
-    }
+    return _passwordController.text.trim() ==
+        _confirmPasswordController.text.trim();
   }
 
   @override
@@ -81,11 +75,10 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Logo
-                SizedBox(height: 40),
-                Image(image: AssetImage('images/logo.png')),
-                // Add some sort of slogan
-                Text(
+                // Logo and Slogan setup
+                const SizedBox(height: 40),
+                const Image(image: AssetImage('images/logo.png')),
+                const Text(
                   "Register Below!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -93,212 +86,96 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontFamily: 'Sniglet',
                   ),
                 ),
+                const SizedBox(height: 20),
 
-                // First Name Text Field
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _firstNameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'First Name',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Sniglet',
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
+                // Input fields
+                buildTextField(_firstNameController, 'First Name'),
+                const SizedBox(height: 10),
+                buildTextField(_lastNameController, 'Last Name'),
+                const SizedBox(height: 10),
+                buildTextField(_emailController, 'Email'),
+                const SizedBox(height: 10),
+                buildTextField(_passwordController, 'Password',
+                    isObscure: true),
+                const SizedBox(height: 10),
+                buildTextField(_confirmPasswordController, 'Confirm Password',
+                    isObscure: true),
+
+                // Sign Up Button
+                const SizedBox(height: 20),
+                buildSignUpButton(),
+
+                // I have an Account TextButton for navigation
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: widget.showLoginPage,
+                  child: const Text(
+                    "I have an account.",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: 'Sniglet',
                     ),
                   ),
-                ),
-
-                // Last Name Text Field
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _lastNameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Last Name',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Sniglet',
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Email Address Text Field
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Sniglet',
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Password Text Field
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Sniglet',
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Confirm Password Text Field
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: _confirmPasswordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Confirm Password',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Sniglet',
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Sign In Button
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    onTap: signUp,
-                    child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              fontFamily: 'Sniglet',
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
-
-                // I have an Account
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    SizedBox(width: 70),
-                    Text(
-                      "I have an account",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        fontFamily: 'Sniglet',
-                      ),
-                    ),
-
-                    // Register
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: GestureDetector(
-                        onTap: widget.showLoginPage,
-                        child: Container(
-                            padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                  fontFamily: 'Sniglet',
-                                ),
-                              ),
-                            )),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                  ],
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextField(TextEditingController controller, String hintText,
+      {bool isObscure = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: TextField(
+            controller: controller,
+            obscureText: isObscure,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: TextStyle(
+                fontFamily: 'Sniglet',
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildSignUpButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: GestureDetector(
+        onTap: signUp,
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const Center(
+            child: Text(
+              "Sign Up",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                fontFamily: 'Sniglet',
+              ),
             ),
           ),
         ),
