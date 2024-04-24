@@ -83,11 +83,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
           ProfilePage(),
         ][currentPageIndex],
       ),
-      /*
-      body: Center(
-        
-      ),
-      */
     );
   }
 }

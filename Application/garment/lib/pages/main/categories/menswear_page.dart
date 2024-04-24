@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-class WomenswearPage extends StatefulWidget {
-  const WomenswearPage({super.key});
+class MenswearPage extends StatefulWidget {
+  const MenswearPage({super.key});
 
   @override
-  State<WomenswearPage> createState() => WomenswearPageState();
+  State<MenswearPage> createState() => _MenswearPageState();
 }
 
-class WomenswearPageState extends State<WomenswearPage> {
+class _MenswearPageState extends State<MenswearPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class WomenswearPageState extends State<WomenswearPage> {
                     ),
                   );
                 },
-                itemCount: 21,
+                itemCount: 16,
               ),
             ),
           ],
