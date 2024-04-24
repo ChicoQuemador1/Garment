@@ -47,7 +47,48 @@ class _StorePageState extends State<StorePage>
         });
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: 100,
+            title: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: SearchAnchor(
+                  builder: (BuildContext context, SearchController controller) {
+                return SearchBar(
+                  backgroundColor: MaterialStateProperty.resolveWith((states) {
+                    return Colors.white;
+                  }),
+                  elevation: MaterialStateProperty.resolveWith((states) {
+                    return 0;
+                  }),
+                  side: MaterialStateProperty.resolveWith((states) {
+                    return BorderSide();
+                  }),
+                  hintText: "Find your new style easy.",
+                  controller: controller,
+                  padding: const MaterialStatePropertyAll<EdgeInsets>(
+                      EdgeInsets.symmetric(horizontal: 16.0)),
+                  onTap: () {
+                    controller.openView();
+                  },
+                  onChanged: (_) {
+                    controller.openView();
+                  },
+                  leading: const Icon(Icons.search),
+                );
+              }, suggestionsBuilder:
+                      (BuildContext context, SearchController controller) {
+                return List<ListTile>.generate(5, (int index) {
+                  final String item = 'item $index';
+                  return ListTile(
+                      title: Text(item),
+                      onTap: () {
+                        setState(() {
+                          controller.closeView(item);
+                        });
+                      });
+                });
+              }),
+            ),
+            titleSpacing: 10,
+            toolbarHeight: 95,
             bottom: TabBar(
               labelStyle: TextStyle(
                 fontFamily: "Sniglet",
