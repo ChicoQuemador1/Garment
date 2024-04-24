@@ -17,7 +17,7 @@ class _OtherswearPageState extends State<OtherswearPage> {
         child: ListView(
           children: [
             SizedBox(
-              height: 575,
+              height: 530,
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3),

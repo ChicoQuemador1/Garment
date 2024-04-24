@@ -47,6 +47,7 @@ class _StorePageState extends State<StorePage>
         });
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: 100,
             bottom: TabBar(
               labelStyle: TextStyle(
                 fontFamily: "Sniglet",
