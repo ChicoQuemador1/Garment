@@ -22,6 +22,7 @@ flutter:
   uses-material-design: true
   assets:
      - images/logo.png
+     - images/test_image.png
   fonts:
     - family: Sniglet
       fonts:

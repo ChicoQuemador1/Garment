@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:garment/pages/main/item_details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +13,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
+
+  void goToItemPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ItemDetailsPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,12 +106,16 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 100,
                   child: ListView.separated(
-                    itemBuilder: (BuildContext context, popIndex) => Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(24)),
-                      height: 100,
-                      width: 100,
+                    itemBuilder: (BuildContext context, popIndex) =>
+                        GestureDetector(
+                      onTap: goToItemPage,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(24)),
+                        height: 100,
+                        width: 100,
+                      ),
                     ),
                     separatorBuilder: (BuildContext context, popIndex) =>
                         VerticalDivider(color: Colors.white, width: 25),
