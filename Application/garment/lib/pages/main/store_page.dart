@@ -26,6 +26,7 @@ class _StorePageState extends State<StorePage>
     ),
   ];
 
+  // ignore: unused_field
   TabController? _tabController;
 
   @override
@@ -40,11 +41,6 @@ class _StorePageState extends State<StorePage>
       length: storeTabs.length,
       child: Builder(builder: (BuildContext context) {
         _tabController = DefaultTabController.of(context);
-        _tabController?.addListener(() {
-          if (_tabController!.indexIsChanging) {
-            // Add a way to implement the change between contents here
-          }
-        });
         return Scaffold(
           appBar: AppBar(
             title: Padding(
