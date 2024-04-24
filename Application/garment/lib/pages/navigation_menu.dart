@@ -3,7 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// Paths to other pages
 import 'main/home_page.dart';
+import 'main/store_page.dart';
 import 'main/profile_page.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -76,7 +78,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
       body: Center(
         child: <Widget>[
           HomePage(),
-          HomePage(),
+          StorePage(),
           HomePage(),
           ProfilePage(),
         ][currentPageIndex],

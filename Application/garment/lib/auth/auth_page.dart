@@ -1,3 +1,7 @@
+/*
+  This pages is used to differentiate between login and registration pages
+*/
+
 import 'package:flutter/material.dart';
 
 import '../pages/login/login_page.dart';
