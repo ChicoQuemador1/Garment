@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import '../../components/product_item.dart';
 
 class ItemDetailsPage extends StatefulWidget {
-  const ItemDetailsPage({super.key});
+  final int itemId;
+  const ItemDetailsPage({super.key, required this.itemId});
 
   @override
   State<ItemDetailsPage> createState() => ItemDetailsPageState();
@@ -23,7 +25,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
               decoration: BoxDecoration(),
               child: Image(
                 width: 250,
-                image: AssetImage("images/test_image.png"),
+                image: AssetImage("images/test_image0.png"),
               ),
             ),
           ),
@@ -41,6 +43,21 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                   ),
                   width: double.infinity,
                   height: 500,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(widget.itemId.toString()),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                      Text("HiHiHiHiHiHi"),
+                    ],
+                  ),
                 ),
               ),
               Center(
@@ -50,6 +67,15 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                   ),
                   width: double.infinity,
                   height: 400,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("ByeByeByeByeByeByeByeByeByeBye"),
+                      Text("ByeByeByeByeByeByeByeByeByeBye"),
+                      Text("ByeByeByeByeByeByeByeByeByeBye"),
+                      Text("ByeByeByeByeByeByeByeByeByeBye"),
+                    ],
+                  ),
                 ),
               )
             ],

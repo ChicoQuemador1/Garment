@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garment/pages/main/item_details_page.dart';
@@ -13,14 +14,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  final List<String> imageList = ["test_image0.png", "test_image1."];
 
-  void goToItemPage() {
+  void goToItemPage(int index) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ItemDetailsPage(),
+        builder: (context) => ItemDetailsPage(
+          itemId: index,
+        ),
       ),
     );
+  }
+
+  void readData() {
+    db.collection('items').get().then((value) {
+      for (var doc in value.docs) {
+        debugPrint("${doc.data()}");
+      }
+    });
   }
 
   @override
@@ -106,15 +119,18 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 100,
                   child: ListView.separated(
-                    itemBuilder: (BuildContext context, popIndex) =>
-                        GestureDetector(
-                      onTap: goToItemPage,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(24)),
-                        height: 100,
-                        width: 100,
+                    itemBuilder: (BuildContext context, popIndex) => Container(
+                      // Get rid of decoration later
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(24)),
+                      height: 100,
+                      width: 100,
+                      child: GestureDetector(
+                        onTap: () => readData(),
+                        child: Image(
+                          image: AssetImage("images/test_image1.png"),
+                        ),
                       ),
                     ),
                     separatorBuilder: (BuildContext context, popIndex) =>
