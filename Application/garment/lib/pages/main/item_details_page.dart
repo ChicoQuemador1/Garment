@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../../components/product_item.dart';
-
 class ItemDetailsPage extends StatefulWidget {
   final int itemId;
   const ItemDetailsPage({super.key, required this.itemId});
