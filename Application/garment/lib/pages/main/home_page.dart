@@ -17,59 +17,36 @@ class _HomePageState extends State<HomePage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final List<String> imageList = ["test_image0.png", "test_image1."];
 
+  final List<int> popularListId = [];
+
   void goToItemPage(int index) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ItemDetailsPage(
-          itemId: index,
+          itemId: popularListId[index],
         ),
       ),
     );
   }
 
-  void readData() {
-    /*
-    db.collection('items').get().then((value) {
+  @override
+  initState() {
+    super.initState();
+    buildPopularItems();
+  }
+
+  void buildPopularItems() {
+    db
+        .collection('items')
+        .orderBy("popularity", descending: true)
+        .get()
+        .then((value) {
       for (var doc in value.docs) {
-        debugPrint("${doc.data()}");
+        debugPrint("${doc["id"]}");
+        popularListId.add(doc["id"]);
       }
     });
-    */
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchAndSortDocuments();
-  }
-
-  List<String> sortedIntegers = [];
-
-  Future<void> _fetchAndSortDocuments() async {
-    try {
-      // Fetch documents ordered by the integer field in descending order
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('items')
-          .orderBy('popularity', descending: true)
-          .get();
-
-      // Extract integers from documents and save them to the list
-      List<String> integers = [];
-      for (var doc in querySnapshot.docs) {
-        String intValue = doc.data().toString();
-        integers.add(intValue);
-      }
-
-      // Set state to update the UI with the sorted list
-      setState(() {
-        sortedIntegers = integers;
-        debugPrint(sortedIntegers.toString());
-      });
-    } catch (error) {
-      // Handle errors, e.g., network issues or Firestore permissions
-      debugPrint('Error fetching and sorting documents: $error');
-    }
   }
 
   @override
@@ -163,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       width: 100,
                       child: GestureDetector(
-                        onTap: () => _fetchAndSortDocuments(),
+                        onTap: () => goToItemPage(popIndex),
                         child: Image(
                           image: AssetImage("images/test_image1.png"),
                         ),

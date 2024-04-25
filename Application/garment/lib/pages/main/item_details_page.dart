@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:garment/models/product.dart';
 
 class ItemDetailsPage extends StatefulWidget {
   final int itemId;
@@ -11,6 +13,25 @@ class ItemDetailsPage extends StatefulWidget {
 }
 
 class ItemDetailsPageState extends State<ItemDetailsPage> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  late Product product;
+
+  void buildItem() {
+    db
+        .collection('items')
+        .where(
+          "id",
+          isEqualTo: widget.itemId,
+        )
+        .get();
+  }
+
+  @override
+  initState() {
+    super.initState();
+    buildItem();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +66,6 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(widget.itemId.toString()),
-                      Text("HiHiHiHiHiHi"),
                       Text("HiHiHiHiHiHi"),
                       Text("HiHiHiHiHiHi"),
                       Text("HiHiHiHiHiHi"),
