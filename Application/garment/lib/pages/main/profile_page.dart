@@ -10,6 +10,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,28 +18,43 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Center(
           child: Column(
             children: [
-              // TEMPORARY Sign out
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Text(
                 "signed in as: ${user.email!}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Sniglet',
                 ),
               ),
-              // Sign Out Button
-              MaterialButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                color: Colors.black54,
-                child: Text(
-                  'Sign Out',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              )
+              // Call the sign out button method here
+              buildSignOutButton(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Define the button outside the build method
+  Widget buildSignOutButton() {
+    return GestureDetector(
+      onTap: () {
+        FirebaseAuth.instance.signOut();
+      },
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.black87, // Match the color used in ForgotPasswordPage
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Center(
+          child: Text(
+            'Sign Out',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              fontFamily: 'Sniglet',
+            ),
           ),
         ),
       ),
