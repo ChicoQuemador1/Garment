@@ -46,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.black87, // Match the color used in ForgotPasswordPage
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(
+        child: const Center(
           child: Text(
             'Sign Out',
             style: TextStyle(
