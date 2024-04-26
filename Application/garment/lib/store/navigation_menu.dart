@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'store_page.dart';
 import 'profile_page.dart';
+import 'bag_page.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
@@ -79,7 +80,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
         child: <Widget>[
           HomePage(),
           StorePage(),
-          HomePage(),
+          BagPage(),
           ProfilePage(),
         ][currentPageIndex],
       ),
