@@ -2,7 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:garment/store/other_pages/add_product_user.dart';
 
@@ -17,6 +19,28 @@ class _ProfilePageState extends State<ProfilePage> {
   final user = FirebaseAuth.instance.currentUser!;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _stateController = TextEditingController();
+  final _zipController = TextEditingController();
+  final _paymentController = TextEditingController();
+
+  @override
+  dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _phoneNumberController.dispose();
+    _addressController.dispose();
+    _cityController.dispose();
+    _stateController.dispose();
+    _zipController.dispose();
+    _paymentController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,8 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               // Welcome
               SizedBox(
@@ -69,11 +92,58 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
+                    // Edits First Name
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text("Change First Name"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextField(
+                                  controller: _firstNameController,
+                                  decoration: InputDecoration(
+                                    hintText: "First Name",
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Assign controller to update user field in database
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black87,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: "Sniglet",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
@@ -98,11 +168,58 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
+                    // Edits Last Name
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text("Change Last Name"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextField(
+                                  controller: _lastNameController,
+                                  decoration: InputDecoration(
+                                    hintText: "Last Name",
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Assign controller to update user field in database
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black87,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: "Sniglet",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
@@ -135,16 +252,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Text("johndoe123@gmail.com"),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
-                      ),
-                    ),
-                  ),
                 ],
               ),
               // Phone Number
@@ -166,11 +273,63 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
+                    // Edits Phone Number
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text("Change Phone Number"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextField(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(10),
+                                  ],
+                                  controller: _phoneNumberController,
+                                  decoration: InputDecoration(
+                                    hintText: "Phone Number",
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Assign controller to update user field in database
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black87,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: "Sniglet",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
@@ -203,11 +362,81 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
+                    // Edits First Name
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text("Change Address"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextField(
+                                  controller: _addressController,
+                                  decoration: InputDecoration(
+                                    hintText: "Street Address",
+                                  ),
+                                ),
+                                TextField(
+                                  controller: _cityController,
+                                  decoration: InputDecoration(
+                                    hintText: "City",
+                                  ),
+                                ),
+                                TextField(
+                                  controller: _stateController,
+                                  decoration: InputDecoration(
+                                    hintText: "State",
+                                  ),
+                                ),
+                                TextField(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(5),
+                                  ],
+                                  controller: _zipController,
+                                  decoration: InputDecoration(
+                                    hintText: "ZIP Code",
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Assign controller to update user field in database
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black87,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: "Sniglet",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
@@ -232,11 +461,58 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: 30,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
+                    // Edits First Name
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text("Change First Name"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextField(
+                                  controller: _firstNameController,
+                                  decoration: InputDecoration(
+                                    hintText: "First Name",
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Assign controller to update user field in database
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black87,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: "Sniglet",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
