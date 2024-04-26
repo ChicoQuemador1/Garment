@@ -53,8 +53,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.grey[300],
-        elevation: 0, // Remove shadow
-        leading: Container(), // Removes the default back arrow
+        elevation: 0,
+        leading: Container(), // Remove shadow // Removes the default back arrow
       ),
       body: Center(
         child: Padding(
@@ -73,7 +73,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               buildResetPasswordButton(),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: widget.showLoginPage, // Corrected function call
+                onPressed: () {
+                  Navigator.pop(context);
+                }, // Corrected function call
                 child: const Text(
                   "I remember now!",
                   style: TextStyle(

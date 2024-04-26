@@ -33,9 +33,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Details'),
-      ),
+      appBar: AppBar(),
       body: FutureBuilder<Product?>(
         future: fetchProductById(),
         builder: (context, snapshot) {
