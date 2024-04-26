@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:garment/store/models/product.dart';
@@ -55,13 +57,17 @@ class _MenswearPageState extends State<WomenswearPage> {
                       ),
                     );
                   },
-                  child: GridTile(
-                    footer: GridTileBar(
-                      backgroundColor: Colors.black54,
-                      title: Text(product.name),
-                      subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
-                    ),
-                    child: Image.network(product.imageUrl, fit: BoxFit.cover),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GridTile(
+                        footer: GridTileBar(
+                          backgroundColor: Colors.black54,
+                          title: Text(product.name),
+                          subtitle:
+                              Text('\$${product.price.toStringAsFixed(2)}'),
+                        ),
+                        child:
+                            Image.network(product.imageUrl, fit: BoxFit.cover)),
                   ),
                 );
               },

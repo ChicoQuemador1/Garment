@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:garment/store/models/product.dart';
@@ -28,6 +30,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
@@ -47,29 +50,86 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
           Product product = snapshot.data!;
           return ListView(
             children: [
-              Image.network(product.imageUrl, height: 250, fit: BoxFit.cover),
+              // Product Image
+              SizedBox(
+                  height: size.height / 2.5,
+                  child: Image.network(product.imageUrl,
+                      height: 250, fit: BoxFit.cover)),
+              Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
+                    height: 500,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(product.brand,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontFamily: "Sniglet",
+                              )),
+                          Text(product.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                                fontFamily: "Sniglet",
+                              )),
+                          Text(product.brand,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontFamily: "Sniglet",
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 400,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                ],
+              ),
+              // Product Name
               ListTile(
                 title: Text(product.name,
                     style: const TextStyle(fontWeight: FontWeight.bold)),
+                // Product Price
                 subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
               ),
+              // Product Description
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Size
                     Text('Size: ${product.size}',
                         style: const TextStyle(fontSize: 16)),
+                    // Condition
                     Text('Condition: ${product.condition}',
                         style: const TextStyle(fontSize: 16)),
+                    // Brand
                     Text('Brand: ${product.brand}',
                         style: const TextStyle(fontSize: 16)),
                     const SizedBox(height: 10),
+                    // Description
                     const Text('Description:',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                     Text(product.description),
                     const SizedBox(height: 20),
+                    // Add to Bag Button
                     ElevatedButton(
                       onPressed:
                           () {}, // Placeholder for add to bag functionality
