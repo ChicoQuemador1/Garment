@@ -54,6 +54,10 @@ class _AddProductPageState extends State<AddProductPage> {
               const SizedBox(height: 20),
 
               // Input fields
+              buildTextField(_nameController, 'Name of Product'),
+              const SizedBox(height: 10),
+              buildTextField(_descriptionController, 'Description'),
+              const SizedBox(height: 10),
               buildTextField(_brandController, 'Brand Name'),
               const SizedBox(height: 10),
               DropdownMenu(
@@ -100,10 +104,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              buildTextField(_descriptionController, 'Description'),
-              const SizedBox(height: 10),
-              buildTextField(_nameController, 'Name of Product'),
-              const SizedBox(height: 10),
+
               buildTextField(_priceController, 'Price'),
               const SizedBox(height: 10),
               buildTextField(_imageURLController, 'Image URL'),
