@@ -7,7 +7,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../pages/navigation_menu.dart';
+import '../../store/navigation_menu.dart';
 import 'auth_page.dart';
 
 class LoginCheck extends StatelessWidget {

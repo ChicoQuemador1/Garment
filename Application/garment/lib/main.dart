@@ -3,7 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:garment/firebase_options.dart';
-import 'package:garment/auth/login_check.dart';
+import 'package:garment/user/auth/login_check.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

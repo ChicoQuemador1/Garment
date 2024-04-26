@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // Paths to other pages
-import 'main/home_page.dart';
-import 'main/store_page.dart';
-import 'main/profile_page.dart';
+import 'home_page.dart';
+import 'store_page.dart';
+import 'profile_page.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
