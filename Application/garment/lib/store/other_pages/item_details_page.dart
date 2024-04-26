@@ -7,7 +7,7 @@ import 'package:garment/store/models/product.dart';
 
 class ItemDetailsPage extends StatefulWidget {
   final String itemId; // Changed from int to String to match Firestore IDs
-  const ItemDetailsPage({Key? key, required this.itemId}) : super(key: key);
+  const ItemDetailsPage({super.key, required this.itemId});
 
   @override
   State<ItemDetailsPage> createState() => ItemDetailsPageState();
@@ -79,6 +79,12 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
+                              fontFamily: "Sniglet",
+                            )),
+                        Text(product.description,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                               fontFamily: "Sniglet",
                             )),
                         Row(
