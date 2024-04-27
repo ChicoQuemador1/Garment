@@ -80,6 +80,16 @@ class FirebaseService {
     }
   }
 
+  // Increment product click count
+  Future<void> incrementProductClick(String productId) async {
+    var productRef = _db.collection('products').doc(productId);
+    return _db.runTransaction((transaction) async {
+      var productSnapshot = await transaction.get(productRef);
+      int currentCount = productSnapshot.data()?['clickCount'] ?? 0;
+      transaction.update(productRef, {'clickCount': currentCount + 1});
+    });
+  }
+
   // Remove product from the bag
   Future<void> removeProductFromBag(String bagProductId) async {
     await _db.collection('bags').doc(bagProductId).delete();

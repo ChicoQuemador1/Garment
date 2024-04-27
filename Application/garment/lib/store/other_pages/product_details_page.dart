@@ -21,6 +21,18 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
   FirebaseService firebaseService =
       FirebaseService(); // Instance of FirebaseService
 
+  @override
+  void initState() {
+    super.initState();
+    incrementClickCount(); // Call to increment the click count on page load
+    fetchProductById(); // Load the product details
+  }
+
+  void incrementClickCount() {
+    firebaseService.incrementProductClick(
+        widget.itemId); // Assuming itemId is the product ID
+  }
+
   Future<Product?> fetchProductById() async {
     try {
       var doc = await db.collection('products').doc(widget.itemId).get();
@@ -34,18 +46,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
     return null;
   }
 
-  late var userId;
-  void getUserId() {
-    db
-        .collection('users')
-        .where('email', isEqualTo: user.email)
-        .get()
-        .then((value) {
-      userId = value.docs[0].id;
-    });
-  }
-
-  // New method to handle adding to bag
+  // Method to handle adding to bag
   void addToBag(Product product) async {
     getUserId();
 
@@ -58,6 +59,17 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
     Navigator.pop(context);
+  }
+
+  late var userId;
+  void getUserId() {
+    db
+        .collection('users')
+        .where('email', isEqualTo: user.email)
+        .get()
+        .then((value) {
+      userId = value.docs[0].id;
+    });
   }
 
   @override

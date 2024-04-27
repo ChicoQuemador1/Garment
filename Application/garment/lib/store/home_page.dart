@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   final List<String> imageList = ["test_image0.png", "test_image1."];
 
   final List<int> popularListId = [];
+  final List<String> newListId = [];
 
   void goToItemPage(int index) {
     Navigator.push(
@@ -31,21 +32,40 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  initState() {
+  void initState() {
     super.initState();
-    buildPopularItems();
+    fetchItems();
   }
 
-  void buildPopularItems() {
-    db
-        .collection('items')
-        .orderBy("popularity", descending: true)
-        .get()
-        .then((value) {
-      for (var doc in value.docs) {
-        debugPrint("${doc["id"]}");
-        popularListId.add(doc["id"]);
-      }
+  void fetchItems() async {
+    await buildPopularItems();
+    await buildNewItems();
+  }
+
+  Future<void> buildPopularItems() async {
+    var querySnapshot = await db
+        .collection('products')
+        .orderBy("clickCount", descending: true)
+        .limit(10)
+        .get();
+
+    setState(() {
+      popularListId.clear();
+      popularListId.addAll(
+          (querySnapshot.docs.map((doc) => doc.id) as Iterable<int>).toList());
+    });
+  }
+
+  Future<void> buildNewItems() async {
+    var querySnapshot = await db
+        .collection('products')
+        .orderBy("createdAt", descending: true)
+        .limit(10)
+        .get();
+
+    setState(() {
+      newListId.clear();
+      newListId.addAll(querySnapshot.docs.map((doc) => doc.id).toList());
     });
   }
 
@@ -88,23 +108,39 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 100,
                   child: ListView.separated(
-                    itemBuilder: (BuildContext context, popIndex) => Container(
-                      // Get rid of decoration later
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 2),
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 100,
-                      width: 100,
-                      child: GestureDetector(
-                        onTap: () => goToItemPage(popIndex),
-                        child: Image(
-                          image: AssetImage("images/test_image1.png"),
-                        ),
-                      ),
-                    ),
-                    separatorBuilder: (BuildContext context, popIndex) =>
+                    itemBuilder: (BuildContext context, int index) {
+                      return FutureBuilder<DocumentSnapshot>(
+                        future: db
+                            .collection('products')
+                            .doc(popularListId[index] as String?)
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData ||
+                              snapshot.data!.data() == null) {
+                            return Container(); // Or some placeholder widget
+                          }
+                          var productData =
+                              snapshot.data!.data() as Map<String, dynamic>;
+                          return GestureDetector(
+                            onTap: () => goToItemPage(
+                                index), // Adjusted for both lists if needed
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 100,
+                              width: 100,
+                              child: Image.network(productData['imageUrl'],
+                                  fit: BoxFit.cover),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
                         VerticalDivider(color: Colors.white, width: 25),
-                    itemCount: 10,
+                    itemCount: popularListId.length,
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
@@ -142,21 +178,43 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 100,
                   child: ListView.separated(
-                    itemBuilder: (BuildContext context, popIndex) => Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 2),
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 100,
-                      width: 100,
-                    ),
-                    separatorBuilder: (BuildContext context, popIndex) =>
+                    itemBuilder: (BuildContext context, int index) {
+                      return FutureBuilder<DocumentSnapshot>(
+                        future: db
+                            .collection('products')
+                            .doc(newListId[index])
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData ||
+                              snapshot.data!.data() == null) {
+                            return Container(); // Or some placeholder widget
+                          }
+                          var productData =
+                              snapshot.data!.data() as Map<String, dynamic>;
+                          return GestureDetector(
+                            onTap: () => goToItemPage(
+                                index), // Assuming newListId handling
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 100,
+                              width: 100,
+                              child: Image.network(productData['imageUrl'],
+                                  fit: BoxFit.cover),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
                         VerticalDivider(color: Colors.white, width: 25),
-                    itemCount: 10,
+                    itemCount: newListId.length,
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
               ),
-
               // Advertisement for sale or something???
               SizedBox(height: 20),
               Padding(
