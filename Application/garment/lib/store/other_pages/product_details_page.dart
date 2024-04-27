@@ -41,7 +41,6 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
         .where('email', isEqualTo: user.email)
         .get()
         .then((value) {
-      debugPrint(value.docs[0].id);
       userId = value.docs[0].id;
     });
   }
@@ -50,8 +49,8 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
   void addToBag(Product product) async {
     getUserId();
 
-    var result = await firebaseService.addProductToBag(
-        userId, product.id, product.toBagProduct());
+    var result =
+        await firebaseService.addProductToBag(userId, product.toBagProduct());
     final snackBar = SnackBar(
       content: Text(
           result ? 'Added to bag successfully!' : 'Item already in your bag!'),
@@ -91,7 +90,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                 width: size.width,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -100,7 +99,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               fontFamily: "Sniglet")),
-                      Text("${product.name} (test length)",
+                      Text(product.name,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
@@ -129,7 +128,9 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("\$$product.price"),
+                              Text("\$${product.price}",
+                                  style: TextStyle(
+                                      fontSize: 30, fontFamily: "Sniglet")),
                               GestureDetector(
                                 onTap: () => addToBag(product),
                                 child: Container(

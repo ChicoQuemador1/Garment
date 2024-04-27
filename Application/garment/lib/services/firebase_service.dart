@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'dart:io';
 import '../store/models/product.dart';
 import '../store/models/bag_product.dart'; // Ensure you have this import for bag product model
@@ -57,13 +58,13 @@ class FirebaseService {
   }
 
   // Add product to the bag if it's not already there
-  Future<bool> addProductToBag(
-      String userId, String productId, BagProduct bagProduct) async {
-    var bagRef = _db
+  Future<bool> addProductToBag(String userId, BagProduct bagProduct) async {
+    var querySnapshot = await _db
         .collection('users')
-        .where('userId', isEqualTo: userId)
-        .where('productId', isEqualTo: bagProduct.productId);
-    var querySnapshot = await bagRef.get();
+        .doc(userId)
+        .collection('bag')
+        .where('productId', isEqualTo: bagProduct.productId)
+        .get();
 
     if (querySnapshot.docs.isEmpty) {
       // Product is not in the bag, add it
