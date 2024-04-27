@@ -58,6 +58,8 @@ class _RegisterPageState extends State<RegisterPage> {
       'first name': firstName,
       'last name': lastName,
       'email': email,
+      'address': "Add Address",
+      'phone': "Add Phone Number",
     });
   }
 
