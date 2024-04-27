@@ -13,7 +13,7 @@ class UserProfile {
     required this.phone,
   });
 
-  factory UserProfile.fromMap(Map<String, dynamic> data, String email) {
+  factory UserProfile.fromMap(Map<String, dynamic> data, String id) {
     return UserProfile(
       firstName: data['first name'],
       lastName: data['last name'],
