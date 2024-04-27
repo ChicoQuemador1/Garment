@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               // Search Bar
               SizedBox(height: 20),
+              /*
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: SearchAnchor(builder:
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                   });
                 }),
               ),
-
+              */
               // Popular Text and Arrow
               SizedBox(height: 10),
               Row(

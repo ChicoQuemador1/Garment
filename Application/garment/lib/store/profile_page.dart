@@ -88,7 +88,12 @@ class _ProfilePageState extends State<ProfilePage> {
               return const Center(child: Text('Error User Profile'));
             }
             if (!snapshot.hasData) {
-              return const Center(child: Text('User not found'));
+              return const Center(
+                child: Text(
+                  'User not found\nPress Profile to Reload',
+                  textAlign: TextAlign.center,
+                ),
+              );
             }
             UserProfile profile = snapshot.data!;
             return Center(
@@ -346,7 +351,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: SizedBox(
                             width: size.width / 1.95,
                             child: Text(
-                              "${profile.phone.substring(0, 3)}-${profile.phone.substring(3, 6)}-${profile.phone.substring(6)}",
+                              profile.phone,
                               style: TextStyle(
                                 fontFamily: "Sniglet",
                                 fontWeight: FontWeight.bold,
@@ -383,11 +388,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                       GestureDetector(
                                         onTap: () {
                                           // Assign controller to update user field in database
-
+                                          String newPhone =
+                                              "${_phoneNumberController.text.trim().substring(0, 3)}-${_phoneNumberController.text.trim().substring(3, 6)}-${_phoneNumberController.text.trim().substring(6)}";
                                           setState(() => updateUserProfile(
-                                              'phone',
-                                              _phoneNumberController.text
-                                                  .trim()));
+                                              'phone', newPhone));
                                           _phoneNumberController.clear();
                                           Navigator.pop(context);
                                         },

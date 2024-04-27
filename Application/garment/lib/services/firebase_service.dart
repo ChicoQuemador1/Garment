@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
@@ -6,6 +9,17 @@ import '../store/models/bag_product.dart'; // Ensure you have this import for ba
 
 class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser!;
+
+  void getUserId() {
+    _db
+        .collection('users')
+        .where('email', isEqualTo: user.email)
+        .get()
+        .then((value) {
+      return value.docs[0].id;
+    });
+  }
 
   // Upload product image and data
   Future<void> addProduct(Product product, File imageFile) async {
@@ -43,16 +57,23 @@ class FirebaseService {
   }
 
   // Add product to the bag if it's not already there
-  Future<bool> addProductToBag(String userId, BagProduct bagProduct) async {
+  Future<bool> addProductToBag(
+      String userId, String productId, BagProduct bagProduct) async {
     var bagRef = _db
-        .collection('bags')
+        .collection('users')
         .where('userId', isEqualTo: userId)
         .where('productId', isEqualTo: bagProduct.productId);
     var querySnapshot = await bagRef.get();
 
     if (querySnapshot.docs.isEmpty) {
       // Product is not in the bag, add it
-      await _db.collection('bags').add(bagProduct.toMap());
+      await _db.collection('users').get().then((value) {
+        _db
+            .collection('users')
+            .doc(userId)
+            .collection('bag')
+            .add(bagProduct.toMap());
+      });
       return true; // Successfully added
     } else {
       return false; // Product already in bag

@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:garment/store/models/product.dart';
@@ -14,6 +17,7 @@ class ItemDetailsPage extends StatefulWidget {
 
 class ItemDetailsPageState extends State<ItemDetailsPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser!;
   FirebaseService firebaseService =
       FirebaseService(); // Instance of FirebaseService
 
@@ -30,10 +34,24 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
     return null;
   }
 
+  late var userId;
+  void getUserId() {
+    db
+        .collection('users')
+        .where('email', isEqualTo: user.email)
+        .get()
+        .then((value) {
+      debugPrint(value.docs[0].id);
+      userId = value.docs[0].id;
+    });
+  }
+
   // New method to handle adding to bag
   void addToBag(Product product) async {
-    var result =
-        await firebaseService.addProductToBag("userId", product.toBagProduct());
+    getUserId();
+
+    var result = await firebaseService.addProductToBag(
+        userId, product.id, product.toBagProduct());
     final snackBar = SnackBar(
       content: Text(
           result ? 'Added to bag successfully!' : 'Item already in your bag!'),
@@ -92,6 +110,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                               fontFamily: "Sniglet")),
+                      SizedBox(height: 20),
                       Row(
                         children: [
                           Expanded(
@@ -107,22 +126,28 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
                               ],
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () => addToBag(product),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 75,
-                              width: size.width / 3,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.black45,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("\$$product.price"),
+                              GestureDetector(
+                                onTap: () => addToBag(product),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 75,
+                                  width: size.width / 3,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    color: Colors.black45,
+                                  ),
+                                  child: Text("Add to Bag",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontFamily: "Sniglet",
+                                          fontWeight: FontWeight.bold)),
+                                ),
                               ),
-                              child: Text("Add to Bag",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: "Sniglet",
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                            ],
                           ),
                         ],
                       ),
