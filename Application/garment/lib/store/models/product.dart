@@ -25,9 +25,7 @@ class Product {
     return Product(
       id: id,
       name: data['name'],
-      price: (data['price'] is int)
-          ? (data['price'] as int).toDouble()
-          : data['price'],
+      price: data['price'].toDouble(), // Ensures price is a double
       description: data['description'],
       imageUrl: data['imageUrl'],
       size: data['size'],

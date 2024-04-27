@@ -56,52 +56,7 @@ class _HomePageState extends State<HomePage> {
         child: Center(
           child: ListView(
             children: [
-              // Search Bar
               SizedBox(height: 20),
-              /*
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: SearchAnchor(builder:
-                    (BuildContext context, SearchController controller) {
-                  return SearchBar(
-                    backgroundColor:
-                        MaterialStateProperty.resolveWith((states) {
-                      return Colors.white;
-                    }),
-                    elevation: MaterialStateProperty.resolveWith((states) {
-                      return 0;
-                    }),
-                    side: MaterialStateProperty.resolveWith((states) {
-                      return BorderSide();
-                    }),
-                    hintText: "Find your new style easy.",
-                    controller: controller,
-                    padding: const MaterialStatePropertyAll<EdgeInsets>(
-                        EdgeInsets.symmetric(horizontal: 16.0)),
-                    onTap: () {
-                      controller.openView();
-                    },
-                    onChanged: (_) {
-                      controller.openView();
-                    },
-                    leading: const Icon(Icons.search),
-                  );
-                }, suggestionsBuilder:
-                    (BuildContext context, SearchController controller) {
-                  return List<ListTile>.generate(5, (int index) {
-                    final String item = 'item $index';
-                    return ListTile(
-                        title: Text(item),
-                        onTap: () {
-                          setState(() {
-                            controller.closeView(item);
-                          });
-                        });
-                  });
-                }),
-              ),
-              */
-              // Popular Text and Arrow
               SizedBox(height: 10),
               Row(
                 children: [
@@ -136,8 +91,8 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (BuildContext context, popIndex) => Container(
                       // Get rid of decoration later
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(24)),
+                          border: Border.all(color: Colors.black, width: 2),
+                          borderRadius: BorderRadius.circular(10)),
                       height: 100,
                       width: 100,
                       child: GestureDetector(
@@ -189,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                   child: ListView.separated(
                     itemBuilder: (BuildContext context, popIndex) => Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(24)),
+                          border: Border.all(color: Colors.black, width: 2),
+                          borderRadius: BorderRadius.circular(10)),
                       height: 100,
                       width: 100,
                     ),
@@ -210,9 +165,9 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.black,
-                      width: 1.2,
+                      width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   height: 150,
                 ),
@@ -226,14 +181,13 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.black,
-                      width: 1.2,
+                      width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   height: 150,
                 ),
               ),
-
               SizedBox(height: 25),
             ],
           ),
