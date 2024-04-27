@@ -57,6 +57,7 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
       duration: Duration(seconds: 2),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Navigator.pop(context);
   }
 
   @override
