@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:garment/store/models/product.dart';
-import 'package:garment/store/other_pages/item_details_page.dart';
+import 'package:garment/store/other_pages/product_details_page.dart';
 
 class OtherswearPage extends StatefulWidget {
   const OtherswearPage({Key? key}) : super(key: key);
