@@ -25,7 +25,9 @@ class Product {
     return Product(
       id: id,
       name: data['name'],
-      price: data['price'],
+      price: (data['price'] is int)
+          ? (data['price'] as int).toDouble()
+          : data['price'],
       description: data['description'],
       imageUrl: data['imageUrl'],
       size: data['size'],

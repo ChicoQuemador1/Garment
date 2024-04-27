@@ -16,13 +16,18 @@ class _MenswearPageState extends State<MenswearPage> {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<List<Product>> getProducts() {
+    print('Fetching products for category: Menswear');
     return _db
         .collection('products')
         .where('category', isEqualTo: 'Menswear')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Product.fromMap(doc.data(), doc.id))
-            .toList());
+        .map((snapshot) {
+      print('Fetched ${snapshot.docs.length} products');
+      return snapshot.docs
+          .map((doc) =>
+              Product.fromMap(doc.data() as Map<String, dynamic>, doc.id))
+          .toList();
+    });
   }
 
   @override
@@ -31,12 +36,18 @@ class _MenswearPageState extends State<MenswearPage> {
       body: StreamBuilder<List<Product>>(
         stream: getProducts(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('Error fetching data: ${snapshot.error}');
+          }
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
+
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No products found'));
           }
+
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, childAspectRatio: 1),
