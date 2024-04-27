@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:garment/store/models/bag_product.dart';
 
+import '../services/firebase_service.dart';
+
 class BagPage extends StatefulWidget {
   const BagPage({super.key});
 
@@ -16,6 +18,7 @@ class BagPage extends StatefulWidget {
 class _BagPageState extends State<BagPage> {
   final user = FirebaseAuth.instance.currentUser!;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  FirebaseService firebaseService = FirebaseService();
   var userId;
 
   Stream<List<BagProduct>> getBagProducts() {
@@ -40,6 +43,11 @@ class _BagPageState extends State<BagPage> {
     });
   }
 
+  removeProductFromBag(BagProduct bagProduct) async {
+    getUserId();
+    await firebaseService.removeProductFromBag(userId, bagProduct);
+  }
+
   @override
   initState() {
     super.initState();
@@ -59,17 +67,15 @@ class _BagPageState extends State<BagPage> {
               return Center(child: CircularProgressIndicator());
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: CircularProgressIndicator());
-              /*
               return Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('No products found'),
-                  Text('Press Bag to Refresh'),
-                ],
-              ));
-              */
+                child: Text(
+                    textAlign: TextAlign.center,
+                    "There is nothing in your bag.\n Go to Home or Store to find your new style easy.",
+                    style: TextStyle(
+                      fontFamily: "Sniglet",
+                      fontSize: 16,
+                    )),
+              );
             }
             double total = 0;
             for (var i = 0; i < snapshot.data!.length; i++) {
@@ -105,6 +111,7 @@ class _BagPageState extends State<BagPage> {
                                         style: TextStyle(fontSize: 14)),
                                     trailing: GestureDetector(
                                       onTap: () {
+                                        removeProductFromBag(bagProduct);
                                         debugPrint("Delete item $bagIndex");
                                       },
                                       child: Text(

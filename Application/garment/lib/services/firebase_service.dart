@@ -82,8 +82,28 @@ class FirebaseService {
   }
 
   // Remove product from the bag
-  Future<void> removeProductFromBag(String bagProductId) async {
-    await _db.collection('bags').doc(bagProductId).delete();
+  Future<void> removeProductFromBag(
+      String userId, BagProduct bagProduct) async {
+    debugPrint("Removing product from");
+    debugPrint(bagProduct.productId);
+    var item = await _db
+        .collection('users')
+        .doc(userId)
+        .collection('bag')
+        .where('productId', isEqualTo: bagProduct.productId)
+        .get();
+    if (item.docs.isEmpty) {
+      debugPrint("Product not in bag");
+    } else {
+      debugPrint("Product is in bag");
+      debugPrint(item.docs[0].id);
+      await _db
+          .collection('users')
+          .doc(userId)
+          .collection('bag')
+          .doc(item.docs[0].id)
+          .delete();
+    }
   }
 
   // Update product in the bag
