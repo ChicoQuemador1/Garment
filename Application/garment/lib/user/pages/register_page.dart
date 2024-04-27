@@ -60,8 +60,6 @@ class _RegisterPageState extends State<RegisterPage> {
       'first name': firstName,
       'last name': lastName,
       'email': email,
-<<<<<<< Updated upstream
-=======
       'address': "Add Address",
       'phone': "Add Phone Number",
     }).then((value) {
@@ -72,37 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
           .collection('bag')
           .add({'test': 'test item'});
     });
-
-    //createBagDatabase(email);
   }
-
-/* 
-  Future createBagDatabase(String email) async {
-    var userId = fetchUserId(email);
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId as String)
-        .collection('bag')
-        .add({
-      'id': userId,
-      'test': 'test item',
-    });
-    debugPrint("Bag database created");
-  }
-
-  Future fetchUserId(String email) async {
-    await db
-        .collection('users')
-        .where('email', isEqualTo: email)
-        .get()
-        .then((value) {
-      var userId = value.docs[0].id;
-      debugPrint("userId:" + userId);
-      return userId;
->>>>>>> Stashed changes
-    });
-  }
-  */
 
   bool passwordConfirmed() {
     return _passwordController.text.trim() ==
