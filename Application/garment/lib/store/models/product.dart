@@ -1,3 +1,5 @@
+import 'package:garment/store/models/bag_product.dart';
+
 class Product {
   final String id;
   final String name;
@@ -42,5 +44,18 @@ class Product {
       'condition': condition,
       'brand': brand,
     };
+  }
+
+  // Convert Product to BagProduct
+  BagProduct toBagProduct() {
+    return BagProduct(
+      id: '', // ID will be empty or set by Firebase when adding to the collection
+      productId: id,
+      name: name,
+      imageUrl: imageUrl,
+      price: price,
+      size: size,
+      brand: brand,
+    );
   }
 }
