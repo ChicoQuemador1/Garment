@@ -18,6 +18,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
   @override
   void dispose() {
     _firstNameController.dispose();
@@ -60,6 +62,13 @@ class _RegisterPageState extends State<RegisterPage> {
       'email': email,
       'address': "Add Address",
       'phone': "Add Phone Number",
+    }).then((value) {
+      debugPrint(value.id);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(value.id)
+          .collection('bag')
+          .add({'void': 'initialize bag db'});
     });
   }
 
