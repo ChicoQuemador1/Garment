@@ -20,6 +20,7 @@ class _BagPageState extends State<BagPage> {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   FirebaseService firebaseService = FirebaseService();
   var userId;
+  var userPayment;
 
   Stream<List<BagProduct>> getBagProducts() {
     getUserId();
@@ -43,15 +44,31 @@ class _BagPageState extends State<BagPage> {
     });
   }
 
+  void getUserPayment() async {
+    _db
+        .collection('users')
+        .where('email', isEqualTo: user.email)
+        .get()
+        .then((value) {
+      userPayment = value.docs[0].data()['payment'];
+    });
+  }
+
   removeProductFromBag(BagProduct bagProduct) async {
     getUserId();
     await firebaseService.removeProductFromBag(userId, bagProduct);
+  }
+
+  clearBag() {
+    getUserId();
+    firebaseService.clearBag(userId);
   }
 
   @override
   initState() {
     super.initState();
     getUserId();
+    getUserPayment();
     getBagProducts();
   }
 
@@ -179,7 +196,65 @@ class _BagPageState extends State<BagPage> {
                                         const EdgeInsets.fromLTRB(0, 0, 20, 0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        debugPrint("Go to checkout");
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              getUserPayment();
+                                              return AlertDialog(
+                                                  title: Text(
+                                                    "Use this Payment Method?",
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  content: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(userPayment + " ?",
+                                                          style: TextStyle(
+                                                              fontSize: 16)),
+                                                      SizedBox(height: 15),
+                                                      Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          ElevatedButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child:
+                                                                  Text("No")),
+                                                          SizedBox(width: 50),
+                                                          ElevatedButton(
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  clearBag();
+                                                                });
+
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content: Text(
+                                                                        "Thank you for shopping!"),
+                                                                    duration: Duration(
+                                                                        seconds:
+                                                                            4),
+                                                                  ),
+                                                                );
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child:
+                                                                  Text("Yes")),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ));
+                                            });
                                       },
                                       child: Container(
                                         height: 50,

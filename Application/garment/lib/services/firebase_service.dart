@@ -83,8 +83,6 @@ class FirebaseService {
   // Remove product from the bag
   Future<void> removeProductFromBag(
       String userId, BagProduct bagProduct) async {
-    debugPrint("Removing product from");
-    debugPrint(bagProduct.productId);
     var item = await _db
         .collection('users')
         .doc(userId)
@@ -92,10 +90,7 @@ class FirebaseService {
         .where('productId', isEqualTo: bagProduct.productId)
         .get();
     if (item.docs.isEmpty) {
-      debugPrint("Product not in bag");
     } else {
-      debugPrint("Product is in bag");
-      debugPrint(item.docs[0].id);
       await _db
           .collection('users')
           .doc(userId)
@@ -115,7 +110,7 @@ class FirebaseService {
   Future<void> clearBag(String userId) async {
     // Fetch all bag items for the user and delete each
     var snapshot =
-        await _db.collection('bags').where('userId', isEqualTo: userId).get();
+        await _db.collection('users').doc(userId).collection('bag').get();
     for (var doc in snapshot.docs) {
       await doc.reference.delete();
     }

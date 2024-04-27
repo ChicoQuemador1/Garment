@@ -6,8 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:garment/store/other_pages/add_product_user.dart';
-
 import 'models/user.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,7 +26,11 @@ class _ProfilePageState extends State<ProfilePage> {
   late final _cityController = TextEditingController();
   late final _stateController = TextEditingController();
   late final _zipController = TextEditingController();
-  late final _paymentController = TextEditingController();
+  late final _paymentNumberController = TextEditingController();
+  late final _paymentNameController = TextEditingController();
+  late final _paymentExpireMonthController = TextEditingController();
+  late final _paymentExpireYearController = TextEditingController();
+  late final _paymentCVVController = TextEditingController();
 
   @override
   void dispose() {
@@ -39,7 +41,11 @@ class _ProfilePageState extends State<ProfilePage> {
     _cityController.dispose();
     _stateController.dispose();
     _zipController.dispose();
-    _paymentController.dispose();
+    _paymentNumberController.dispose();
+    _paymentNameController.dispose();
+    _paymentExpireMonthController.dispose();
+    _paymentExpireYearController.dispose();
+    _paymentCVVController.dispose();
     super.dispose();
   }
 
@@ -569,7 +575,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: SizedBox(
                             width: size.width / 1.95,
                             child: Text(
-                              "VISA: **** 1234",
+                              profile.payment,
                               style: TextStyle(
                                 fontFamily: "Sniglet",
                                 fontWeight: FontWeight.bold,
@@ -586,20 +592,106 @@ class _ProfilePageState extends State<ProfilePage> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
-                                  title: Text("Change First Name"),
+                                  title: Text("Change Payment Method",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      )),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       TextField(
-                                        controller: _firstNameController,
+                                        controller: _paymentNumberController,
                                         decoration: InputDecoration(
-                                          hintText: "First Name",
+                                          hintText: "Card Number",
                                         ),
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(16,
+                                              maxLengthEnforcement:
+                                                  MaxLengthEnforcement
+                                                      .enforced),
+                                        ],
+                                      ),
+                                      TextField(
+                                        controller: _paymentNameController,
+                                        decoration: InputDecoration(
+                                          hintText: "Name on Card",
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Expiry:"),
+                                          SizedBox(width: 10),
+                                          SizedBox(
+                                            width: 30,
+                                            child: TextField(
+                                              controller:
+                                                  _paymentExpireMonthController,
+                                              decoration: InputDecoration(
+                                                hintText: "MM",
+                                              ),
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                LengthLimitingTextInputFormatter(
+                                                    2),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 15,
+                                            child: Text(
+                                              "/",
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 30,
+                                            child: TextField(
+                                              controller:
+                                                  _paymentExpireYearController,
+                                              decoration: InputDecoration(
+                                                hintText: "YY",
+                                              ),
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                LengthLimitingTextInputFormatter(
+                                                    2),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(width: 50),
+                                          SizedBox(
+                                            width: 50,
+                                            child: TextField(
+                                              controller: _paymentCVVController,
+                                              decoration: InputDecoration(
+                                                hintText: "CVV",
+                                              ),
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                LengthLimitingTextInputFormatter(
+                                                    3),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          // Assign controller to update user field in database
+                                          String payment =
+                                              "Card Ending In: **** ${_paymentNumberController.text.trim().substring(12)}";
+                                          setState(() => updateUserProfile(
+                                              'payment', payment));
+                                          _paymentNumberController.clear();
+                                          _paymentNameController.clear();
+                                          _paymentExpireMonthController.clear();
+                                          _paymentExpireYearController.clear();
+                                          _paymentCVVController.clear();
                                           Navigator.pop(context);
                                         },
                                         child: Container(
@@ -642,6 +734,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 4,
                     ),
                     SizedBox(height: 20),
+                    /*
                     // Add Item
                     GestureDetector(
                       onTap: () {
@@ -671,6 +764,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     SizedBox(height: 20),
+                    */
 
                     // Call the sign out button method here
                     buildSignOutButton(),

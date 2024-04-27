@@ -4,6 +4,7 @@ class UserProfile {
   final String email;
   final String address;
   final String phone;
+  final String payment;
 
   UserProfile({
     required this.firstName,
@@ -11,6 +12,7 @@ class UserProfile {
     required this.email,
     required this.address,
     required this.phone,
+    required this.payment,
   });
 
   factory UserProfile.fromMap(Map<String, dynamic> data, String id) {
@@ -20,6 +22,7 @@ class UserProfile {
       email: data['email'],
       address: data['address'],
       phone: data['phone'],
+      payment: data['payment'],
     );
   }
 
@@ -30,6 +33,7 @@ class UserProfile {
       'email': email,
       'address': address,
       'phone': phone,
+      'payment': payment,
     };
   }
 }

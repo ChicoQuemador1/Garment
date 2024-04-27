@@ -62,6 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
       'email': email,
       'address': "Add Address",
       'phone': "Add Phone Number",
+      'payment': "Add Payment",
     }).then((value) {
       debugPrint(value.id);
       FirebaseFirestore.instance
