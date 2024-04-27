@@ -52,6 +52,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Image(image: AssetImage("images/logo.png"))),
+        titleSpacing: 10,
+        toolbarHeight: 95,
+      ),
       body: SafeArea(
         child: Center(
           child: ListView(

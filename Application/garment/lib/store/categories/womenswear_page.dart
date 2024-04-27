@@ -58,7 +58,7 @@ class _MenswearPageState extends State<WomenswearPage> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(1.0),
                     child: GridTile(
                         footer: GridTileBar(
                           backgroundColor: Colors.black54,

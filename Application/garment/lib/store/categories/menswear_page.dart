@@ -63,13 +63,16 @@ class _MenswearPageState extends State<MenswearPage> {
                     ),
                   );
                 },
-                child: GridTile(
-                  footer: GridTileBar(
-                    backgroundColor: Colors.black54,
-                    title: Text(product.name),
-                    subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+                child: Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: GridTile(
+                    footer: GridTileBar(
+                      backgroundColor: Colors.black54,
+                      title: Text(product.name),
+                      subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+                    ),
+                    child: Image.network(product.imageUrl, fit: BoxFit.cover),
                   ),
-                  child: Image.network(product.imageUrl, fit: BoxFit.cover),
                 ),
               );
             },

@@ -43,6 +43,8 @@ class _StorePageState extends State<StorePage>
         _tabController = DefaultTabController.of(context);
         return Scaffold(
           appBar: AppBar(
+            title: Center(child: Image(image: AssetImage("images/logo.png"))),
+            /*
             title: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: SearchAnchor(
@@ -83,6 +85,7 @@ class _StorePageState extends State<StorePage>
                 });
               }),
             ),
+            */
             titleSpacing: 10,
             toolbarHeight: 95,
             bottom: TabBar(
