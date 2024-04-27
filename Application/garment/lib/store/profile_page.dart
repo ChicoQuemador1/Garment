@@ -655,7 +655,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         child: Center(
                           child: Text(
-                            "Add Item",
+                            "Sell Now",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Sniglet',
