@@ -21,12 +21,23 @@ class _HomePageState extends State<HomePage> {
 
   final List<String> newListId = [];
 
-  void goToItemPage(int index) {
+  void goToPopularItemPage(int index) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ItemDetailsPage(
           itemId: popularListId[index].toString(),
+        ),
+      ),
+    );
+  }
+
+  void goToNewItemPage(int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ItemDetailsPage(
+          itemId: newListId[index].toString(),
         ),
       ),
     );
@@ -113,11 +124,11 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 100,
                   child: ListView.separated(
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (BuildContext context, int popIndex) {
                       return FutureBuilder<DocumentSnapshot>(
                         future: db
                             .collection('products')
-                            .doc(popularListId[index] as String?)
+                            .doc(popularListId[popIndex] as String?)
                             .get(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData ||
@@ -127,8 +138,8 @@ class _HomePageState extends State<HomePage> {
                           var productData =
                               snapshot.data!.data() as Map<String, dynamic>;
                           return GestureDetector(
-                            onTap: () => goToItemPage(
-                                index), // Adjusted for both lists if needed
+                            onTap: () => goToPopularItemPage(
+                                popIndex), // Adjusted for both lists if needed
                             child: Container(
                               decoration: BoxDecoration(
                                   border:
@@ -183,11 +194,11 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 100,
                   child: ListView.separated(
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (BuildContext context, int newIndex) {
                       return FutureBuilder<DocumentSnapshot>(
                         future: db
                             .collection('products')
-                            .doc(newListId[index])
+                            .doc(newListId[newIndex] as String?)
                             .get(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData ||
@@ -197,8 +208,8 @@ class _HomePageState extends State<HomePage> {
                           var productData =
                               snapshot.data!.data() as Map<String, dynamic>;
                           return GestureDetector(
-                            onTap: () => goToItemPage(
-                                index), // Assuming newListId handling
+                            onTap: () => goToNewItemPage(
+                                newIndex), // Assuming newListId handling
                             child: Container(
                               decoration: BoxDecoration(
                                   border:
