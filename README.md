@@ -13,10 +13,14 @@
 - [Mark Denina](https://github.com/mdenina1)
 
 
-
 ## 🔒 Licensing
 
 This project is licensed under the [MIT License](LICENSE). But please give us credit if you use our work. 😄
+
+## 🏃 Running the Project
+
+- run "cd Application/garment" on the terminal
+- Then "flutter run " on the terminal
 
 ---
 
