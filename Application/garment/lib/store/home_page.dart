@@ -17,7 +17,8 @@ class _HomePageState extends State<HomePage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final List<String> imageList = ["test_image0.png", "test_image1."];
 
-  final List<int> popularListId = [];
+  final List<String> popularListId = [];
+
   final List<String> newListId = [];
 
   void goToItemPage(int index) {
@@ -51,8 +52,7 @@ class _HomePageState extends State<HomePage> {
 
     setState(() {
       popularListId.clear();
-      popularListId.addAll(
-          (querySnapshot.docs.map((doc) => doc.id) as Iterable<int>).toList());
+      popularListId.addAll(querySnapshot.docs.map((doc) => doc.id).toList());
     });
   }
 

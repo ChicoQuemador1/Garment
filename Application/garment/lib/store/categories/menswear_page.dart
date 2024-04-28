@@ -37,13 +37,11 @@ class _MenswearPageState extends State<MenswearPage> {
         stream: getProducts(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('Error fetching data: ${snapshot.error}');
+            return Center(child: Text('Error: ${snapshot.error}'));
           }
-
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
-
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No products found'));
           }
