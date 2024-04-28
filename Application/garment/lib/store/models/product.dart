@@ -24,14 +24,25 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> data, String id) {
     return Product(
       id: id,
-      name: data['name'],
-      price: data['price'].toDouble(), // Ensures price is a double
-      description: data['description'],
-      imageUrl: data['imageUrl'],
-      size: data['size'],
-      condition: data['condition'],
-      brand: data['brand'],
+      name: data['name'] ?? 'Unknown',
+      price: _ensureDouble(
+          data['price']), // Use a helper function to ensure it's a double
+      description: data['description'] ?? '',
+      imageUrl: data['imageUrl'] ?? 'default_image.png',
+      size: data['size'] ?? 'N/A',
+      condition: data['condition'] ?? 'N/A',
+      brand: data['brand'] ?? 'No Brand',
     );
+  }
+
+// Helper function to convert any input to a double
+  static double _ensureDouble(dynamic value) {
+    if (value == null) return 0.0;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String)
+      return double.tryParse(value) ?? 0.0; // Safely try to parse the string
+    return 0.0; // Default return value if none of the above conditions are met
   }
 
   Map<String, dynamic> toMap() {

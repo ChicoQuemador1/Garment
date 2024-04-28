@@ -15,10 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
   FirebaseFirestore db = FirebaseFirestore.instance;
-  final List<String> imageList = ["test_image0.png", "test_image1."];
-
   final List<String> popularListId = [];
-
   final List<String> newListId = [];
 
   void goToItemPage(int index) {
