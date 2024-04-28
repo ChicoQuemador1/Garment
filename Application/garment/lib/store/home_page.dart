@@ -130,13 +130,12 @@ class _HomePageState extends State<HomePage> {
                         builder: (context, snapshot) {
                           if (!snapshot.hasData ||
                               snapshot.data!.data() == null) {
-                            return Container(); // Or some placeholder widget
+                            return Container();
                           }
                           var productData =
                               snapshot.data!.data() as Map<String, dynamic>;
                           return GestureDetector(
-                            onTap: () => goToPopularItemPage(
-                                popIndex), // Adjusted for both lists if needed
+                            onTap: () => goToPopularItemPage(popIndex),
                             child: Container(
                               decoration: BoxDecoration(
                                   border:
@@ -200,13 +199,12 @@ class _HomePageState extends State<HomePage> {
                         builder: (context, snapshot) {
                           if (!snapshot.hasData ||
                               snapshot.data!.data() == null) {
-                            return Container(); // Or some placeholder widget
+                            return Container();
                           }
                           var productData =
                               snapshot.data!.data() as Map<String, dynamic>;
                           return GestureDetector(
-                            onTap: () => goToNewItemPage(
-                                newIndex), // Assuming newListId handling
+                            onTap: () => goToNewItemPage(newIndex),
                             child: Container(
                               decoration: BoxDecoration(
                                   border:
@@ -228,9 +226,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              // Advertisement for sale or something???
+
               SizedBox(height: 20),
-// Featured Category Box with GIF
+
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Container(
@@ -250,7 +248,6 @@ class _HomePageState extends State<HomePage> {
               // Almost Out ???
               SizedBox(height: 20),
 
-// Exclusive Offers Box with GIF
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Container(

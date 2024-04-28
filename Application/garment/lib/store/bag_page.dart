@@ -102,7 +102,6 @@ class _BagPageState extends State<BagPage> {
               child: Center(
                 child: ListView(
                   children: [
-                    // List of Items in Cart
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: SizedBox(

@@ -174,7 +174,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          // Assign controller to update user field in database
                                           setState(() => updateUserProfile(
                                               'first name',
                                               _firstNameController.text
@@ -263,7 +262,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          // Assign controller to update user field in database
                                           setState(() => updateUserProfile(
                                               'last name',
                                               _lastNameController.text.trim()));
@@ -393,7 +391,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          // Assign controller to update user field in database
                                           String newPhone =
                                               "${_phoneNumberController.text.trim().substring(0, 3)}-${_phoneNumberController.text.trim().substring(3, 6)}-${_phoneNumberController.text.trim().substring(6)}";
                                           setState(() => updateUserProfile(
@@ -513,7 +510,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          // Assign controller to update user field in database
                                           String address =
                                               "${_addressController.text.trim()}\n${_cityController.text.trim()}, ${_stateController.text.trim()} ${_zipController.text.trim()}";
                                           setState(() => updateUserProfile(
@@ -734,39 +730,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 4,
                     ),
                     SizedBox(height: 20),
-                    /*
-                    // Add Item
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddProductPage()));
-                      },
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black87,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Sell Now",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Sniglet',
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    */
 
-                    // Call the sign out button method here
                     buildSignOutButton(),
                   ],
                 ),
@@ -776,7 +740,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // Define the button outside the build method
   Widget buildSignOutButton() {
     return GestureDetector(
       onTap: () {
@@ -785,7 +748,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.black87, // Match the color used in ForgotPasswordPage
+          color: Colors.black87,
           borderRadius: BorderRadius.circular(12),
         ),
         child: const Center(

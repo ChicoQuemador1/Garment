@@ -18,9 +18,7 @@ class _WomenswearPageState extends State<WomenswearPage> {
   Stream<List<Product>> getProducts() {
     return _db
         .collection('products')
-        .where('category',
-            isEqualTo:
-                'Womenswear') // Assuming there's a 'category' field in your Firestore documents
+        .where('category', isEqualTo: 'Womenswear')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => Product.fromMap(doc.data(), doc.id))
@@ -47,9 +45,8 @@ class _WomenswearPageState extends State<WomenswearPage> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 1,
-                crossAxisSpacing: 10, // Space between columns
-                mainAxisSpacing: 10 // Space between rows
-                ),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10),
             itemCount: snapshot.data!.length,
             itemBuilder: (BuildContext context, int index) {
               Product product = snapshot.data![index];
@@ -66,14 +63,11 @@ class _WomenswearPageState extends State<WomenswearPage> {
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.black, width: 2), // Thicker border
-                      borderRadius:
-                          BorderRadius.circular(10), // Optional rounded corners
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(
-                          5.0), // Padding between image and border
+                      padding: const EdgeInsets.all(5.0),
                       child: GridTile(
                         footer: GridTileBar(
                           backgroundColor: Colors.black54,

@@ -25,8 +25,7 @@ class Product {
     return Product(
       id: id,
       name: data['name'] ?? 'Unknown',
-      price: _ensureDouble(
-          data['price']), // Use a helper function to ensure it's a double
+      price: _ensureDouble(data['price']),
       description: data['description'] ?? '',
       imageUrl: data['imageUrl'] ?? 'default_image.png',
       size: data['size'] ?? 'N/A',
@@ -40,9 +39,8 @@ class Product {
     if (value == null) return 0.0;
     if (value is double) return value;
     if (value is int) return value.toDouble();
-    if (value is String)
-      return double.tryParse(value) ?? 0.0; // Safely try to parse the string
-    return 0.0; // Default return value if none of the above conditions are met
+    if (value is String) return double.tryParse(value) ?? 0.0;
+    return 0.0;
   }
 
   Map<String, dynamic> toMap() {
@@ -60,7 +58,7 @@ class Product {
   // Convert Product to BagProduct
   BagProduct toBagProduct() {
     return BagProduct(
-      id: '', // ID will be empty or set by Firebase when adding to the collection
+      id: '',
       productId: id,
       name: name,
       imageUrl: imageUrl,

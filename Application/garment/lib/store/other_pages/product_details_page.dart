@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:garment/store/models/product.dart';
-import 'package:garment/services/firebase_service.dart'; // Ensure FirebaseService is correctly imported
+import 'package:garment/services/firebase_service.dart';
 
 class ItemDetailsPage extends StatefulWidget {
-  final String itemId; // This ID is passed when navigating to this page
+  final String itemId;
   const ItemDetailsPage({super.key, required this.itemId});
 
   @override
@@ -18,14 +18,13 @@ class ItemDetailsPage extends StatefulWidget {
 class ItemDetailsPageState extends State<ItemDetailsPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
-  FirebaseService firebaseService =
-      FirebaseService(); // Instance of FirebaseService
+  FirebaseService firebaseService = FirebaseService();
 
   @override
   void initState() {
     super.initState();
-    incrementClickCount(); // Call to increment the click count on page load
-    fetchProductById(); // Load the product details
+    incrementClickCount();
+    fetchProductById();
   }
 
   void incrementClickCount() {
@@ -40,13 +39,11 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
         return Product.fromMap(doc.data()!, doc.id);
       }
     } catch (e) {
-      print(
-          e); // Consider handling error scenarios, possibly showing an error message to the user
+      print(e);
     }
     return null;
   }
 
-  // Method to handle adding to bag
   void addToBag(Product product) async {
     getUserId();
 
@@ -92,7 +89,6 @@ class ItemDetailsPageState extends State<ItemDetailsPage> {
           Product product = snapshot.data!;
           return ListView(
             children: [
-              // Product Image
               SizedBox(
                 height: size.height / 2,
                 child: Image.network(product.imageUrl,

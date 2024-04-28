@@ -1,6 +1,6 @@
 class BagProduct {
   final String id;
-  final String productId; // Reference to the product ID
+  final String productId;
   final String name;
   final String imageUrl;
   final double price;
