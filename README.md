@@ -12,6 +12,9 @@
 - [Alexis Cruz-Aboytes](https://github.com/ChicoQuemador1)
 - [Mark Denina](https://github.com/mdenina1)
 
+Youtube Channel:
+https://www.youtube.com/@_AMplify./featured
+
 
 ## 🔒 Licensing
 
@@ -23,9 +26,5 @@ This project is licensed under the [MIT License](LICENSE). But please give us cr
 - Then "flutter run " on the terminal
 
 ---
-
-To Run Project:
-1.make sure to run "cd Application/garment" on the terminal so it takes you to the root of the project
-2. Then "flutter run " on the terminal
 
 *Stay tuned as we continue to enhance Garment with more updates !* 💸 📈
