@@ -230,15 +230,18 @@ class _HomePageState extends State<HomePage> {
               ),
               // Advertisement for sale or something???
               SizedBox(height: 20),
+// Featured Category Box with GIF
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2,
-                    ),
+                    border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://media.giphy.com/media/8UFoLGykHJyXRL4DQk/giphy.gif"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   height: 150,
                 ),
@@ -246,19 +249,24 @@ class _HomePageState extends State<HomePage> {
 
               // Almost Out ???
               SizedBox(height: 20),
+
+// Exclusive Offers Box with GIF
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2,
-                    ),
+                    border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://media.giphy.com/media/5xU0jMbXNLqJiBUHp0/giphy.gif"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   height: 150,
                 ),
               ),
+
               SizedBox(height: 25),
             ],
           ),
