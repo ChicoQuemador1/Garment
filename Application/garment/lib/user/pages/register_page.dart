@@ -63,13 +63,6 @@ class _RegisterPageState extends State<RegisterPage> {
       'address': "Add Address",
       'phone': "Add Phone Number",
       'payment': "Add Payment",
-    }).then((value) {
-      debugPrint(value.id);
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(value.id)
-          .collection('bag')
-          .add({'void': 'initialize bag db'});
     });
   }
 
