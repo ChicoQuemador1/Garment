@@ -15,6 +15,9 @@
 Youtube Channel:
 https://www.youtube.com/@_AMplify./featured
 
+Final Presentation Slides:
+https://docs.google.com/presentation/d/1f4D_CFtaENT0KSHLSy0xhA9Ir8N3rDB6bXLq0gwQ0m4/edit?usp=sharing
+
 
 ## 🔒 Licensing
 
