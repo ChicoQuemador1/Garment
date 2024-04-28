@@ -20,4 +20,8 @@ This project is licensed under the [MIT License](LICENSE). But please give us cr
 
 ---
 
+To Run Project:
+1.make sure to run "cd Application/garment" on the terminal so it takes you to the root of the project
+2. Then "flutter run " on the terminal
+
 *Stay tuned as we continue to enhance Garment with more updates !* 💸 📈
